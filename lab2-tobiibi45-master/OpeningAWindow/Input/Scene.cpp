@@ -2,6 +2,7 @@
 #include "TransformComponent.h"
 #include "ColourComponent.h"
 #include "Scene.h"
+#include "CameraComponent.h"
 
 Scene::Scene()
 {
@@ -20,7 +21,8 @@ void Scene::render(IEngineCore* engineInterfacePtr)
 	engineInterfacePtr->renderColouredBackground(0, 0, 0);
 
 	// update the camera (probably don't need to do this each frame)
-	engineInterfacePtr->setCamera(&m_camera);
+	
+	engineInterfacePtr->setCamera(m_camera);
 
 	// draw the cubes
 	for (auto cube : v_gameObjects)
