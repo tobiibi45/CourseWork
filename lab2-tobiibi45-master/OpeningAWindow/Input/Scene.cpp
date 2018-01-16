@@ -25,7 +25,7 @@ void Scene::render(IEngineCore* engineInterfacePtr)
 	// draw the cubes
 	for (auto cube : v_gameObjects)
 	{
-		engineInterfacePtr->drawCube(cube.getComponent<TransformComponent>()->getModelMatrix());
+		engineInterfacePtr->drawCube(cube->getComponent<TransformComponent>()->getModelMatrix());
 	}
 }
 

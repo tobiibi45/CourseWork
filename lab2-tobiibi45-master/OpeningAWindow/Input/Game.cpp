@@ -29,34 +29,22 @@ Game::Game()
 
 void Game::update()
 {
-	//// perform all the logic for your game world
-	//if (m_currentScene)
-	//	m_currentScene->update();
+	// perform all the logic for your game world
+	if (m_currentScene)
+		m_currentScene->update();
 }
 
 void Game::render()
 {
-	float redValue = 0, greenValue = 0, blueValue = 0;
-	if (m_currentScene->m_playerBackground.getComponent<RedComponent>())
-		redValue = m_currentScene->m_playerBackground.getComponent<RedComponent>()->m_colourValue;
-	if (m_currentScene->m_playerBackground.getComponent<GreenComponent>())
-		greenValue = m_currentScene->m_playerBackground.getComponent<GreenComponent>()->m_colourValue;
-	if (m_currentScene->m_playerBackground.getComponent<BlueComponent>())
-		blueValue = m_currentScene->m_playerBackground.getComponent<BlueComponent>()->m_colourValue;
-
-	// e.g. pass object details to the engine to render the next frame
-	m_engineInterfacePtr->renderColouredBackground(redValue, greenValue, blueValue);
-
-	// update the camera (probably don't need to do this each frame)
-	m_engineInterfacePtr->setCamera(&m_camera);
-
-	// draw the cube
-	m_engineInterfacePtr->drawCube(m_currentScene->m_playerCube.getComponent<TransformComponent>()->getModelMatrix());
+	// perform all the logic for your game world
+	if (m_currentScene)
+		m_currentScene->render(m_engineInterfacePtr);
 }
 
 
 bool Game::loadLevelJSON(std::string levelJSONFile)
 {
+
 	if (m_currentScene)
 	{
 		m_currentScene->cleanup();
@@ -79,10 +67,12 @@ bool Game::loadLevelJSON(std::string levelJSONFile)
 	const Json::Value gameObjects = root["GameObjects"];
 
 	// resize our vector of cubes
-	m_currentScene->v_gameObjects.resize(gameObjects.size());
+	//m_currentScene->v_gameObjects.resize(gameObjects.size());
 
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
+		m_currentScene->v_gameObjects.push_back(new GameObject);
+
 		std::cout << gameObjects[i]["name"].asString() << " loaded\n";
 
 		float w, x, y, z;
@@ -127,7 +117,7 @@ bool Game::loadLevelJSON(std::string levelJSONFile)
 
 		glm::vec3 scale(x, y, z);
 
-		m_currentScene->v_gameObjects[i].addComponent(new TransformComponent(pos, orient, scale));
+		m_currentScene->v_gameObjects[i]->addComponent(new TransformComponent(pos, orient, scale));
 
 	}
 
@@ -193,7 +183,7 @@ void Game::loadLevel(std::string levelFile)
 			ss >> x >> y >> z;
 			glm::vec3 scale(x, y, z);
 
-			m_currentScene->v_gameObjects[i].addComponent(new TransformComponent(pos, orient, scale));
+			m_currentScene->v_gameObjects[i]->addComponent(new TransformComponent(pos, orient, scale));
 
 		}
 	}
