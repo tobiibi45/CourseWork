@@ -253,9 +253,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="ColourComponent.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="Definitions.h" />
+    <ClInclude Include="ft2build.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GLFW_EngineCore.h" />
@@ -265,6 +267,7 @@
     <ClInclude Include="json.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="TransformComponent.h" />
