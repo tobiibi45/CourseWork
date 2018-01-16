@@ -15,6 +15,7 @@ Game::Game()
 	m_currentScene->m_playerBackground.addComponent(new GreenComponent);
 	m_currentScene->m_playerBackground.addComponent(new BlueComponent);
 	m_currentScene->m_playerCube.addComponent(new TransformComponent);
+	m_currentScene->m_playerCube.addComponent(new playerCamera);
 
 
 	m_engineInterfacePtr = nullptr;
