@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <glm/mat4x4.hpp>
+#include "Model.h"
 
 class Camera;
 class Game;
@@ -19,5 +20,7 @@ public:
 	virtual void renderColouredBackground(float r, float g, float b) = 0;
 	virtual	void setCamera(const Camera* cam) = 0;
 	virtual void drawCube(const glm::mat4& modelMatrix) = 0;
+	virtual void drawModel(Model* model, const glm::mat4& modelMatrix) = 0;
+	virtual void renderText(std::string text, float x, float y, float scale, glm::vec3 colour) = 0;
 };
 
