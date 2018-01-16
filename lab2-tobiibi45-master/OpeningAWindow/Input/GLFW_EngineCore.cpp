@@ -158,7 +158,7 @@ void GLFW_EngineCore::renderText(std::string text, float x, float y, float scale
 }
 
 
-void GLFW_EngineCore::setCamera(const CameraComponent* cam)
+void GLFW_EngineCore::setCamera(const Camera* cam)
 {
 	// set the view and projection components of our shader to the camera values
 	glm::mat4 projection = glm::perspective(glm::radians(cam->m_fov), (float)m_screenWidth / (float)m_screenHeight, 0.1f, 10000.0f);

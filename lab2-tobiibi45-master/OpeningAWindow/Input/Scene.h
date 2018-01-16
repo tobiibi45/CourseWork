@@ -17,5 +17,5 @@ public:
 	GameObject m_playerCube;
 
 	std::vector<GameObject*> v_gameObjects;
-	CameraComponent* m_camera;
+	Camera m_camera;
 };

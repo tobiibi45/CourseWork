@@ -43,5 +43,3 @@ public:
 	void setFOV(float fov) { m_fov = fov; }
 
 };
-
-class playerCamera : public CameraComponent {};
