@@ -23,7 +23,7 @@ public:
 	void renderColouredBackground(float r, float g, float b) override;
 	void renderText(std::string text, float x, float y, float scale, glm::vec3 colour) override;
 
-	void setCamera(const Camera* cam) override;
+	void setCamera(const CameraComponent* cam) override;
 	void drawCube(const glm::mat4& modelMatrix) override;
 	void drawModel(Model* model, const glm::mat4& modelMatrix) override;
 
