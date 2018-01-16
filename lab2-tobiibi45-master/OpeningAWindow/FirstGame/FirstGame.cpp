@@ -3,6 +3,10 @@
 #include <fstream>
 #include <sstream>
 #include <json.h>
+#include "PlayerCharacter.h"
+#include <GameObject.h>
+#include "GameObjects.h"
+#include <InputHandler.h>
 
 FirstGame::FirstGame()
 {
@@ -19,7 +23,7 @@ void FirstGame::render()
 
 }
 
-bool loadLevelJSON(std::string levelJSONFile)
+bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 {
 	if (m_currentScene)
 	{
@@ -42,14 +46,27 @@ bool loadLevelJSON(std::string levelJSONFile)
 	}
 	const Json::Value gameObjects = root["GameObjects"];
 
-	// resize our vector of cubes
-	//m_currentScene->v_gameObjects.resize(gameObjects.size());
 
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
-		m_currentScene->v_gameObjects.push_back(new GameObject);
+	
+		string type = gameObjects[i]["type"].asString();
 
-		std::cout << gameObjects[i]["name"].asString() << " loaded\n";
+		if (type == "PlayerCharacter")
+		{
+			m_currentScene->v_gameObjects.push_back(new PlayerCharacter());
+			m_currentScene->m_camera = m_currentScene->v_gameObjects[i]->getComponent<CameraComponent>();
+			m_inputHandler->v_objectsRequiringInput.push_back(m_currentScene->v_gameObjects[i]);
+		}
+		else if (type == "StaticEnvironmentObject")
+		{
+			m_currentScene->v_gameObjects.push_back(new StaticEnvironmentObject());
+		}
+		else
+		{
+			std::cout << type << ": unknown type\n";
+			continue; // not an object we can create
+		}
 
 		float w, x, y, z;
 		// has to have a position node
@@ -94,6 +111,8 @@ bool loadLevelJSON(std::string levelJSONFile)
 		glm::vec3 scale(x, y, z);
 
 		m_currentScene->v_gameObjects[i]->addComponent(new TransformComponent(pos, orient, scale));
+
+		std::cout << gameObjects[i]["name"].asString() << "-" << type << " loaded\n";
 
 	}
 

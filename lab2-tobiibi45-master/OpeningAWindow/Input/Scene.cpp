@@ -22,7 +22,7 @@ void Scene::render(IEngineCore* engineInterfacePtr)
 
 	// update the camera (probably don't need to do this each frame)
 	
-	engineInterfacePtr->setCamera(&m_camera);
+	engineInterfacePtr->setCamera(m_camera);
 
 	// draw the cubes
 	for (auto cube : v_gameObjects)

@@ -1,7 +1,6 @@
 #pragma once
 #include "Components.h"
 #include "Definitions.h"
-#include "Model.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -14,9 +13,47 @@ class CameraComponent : public Components
 {
 
 public:
+
 	glm::vec3 m_position;
 	glm::quat m_orientation;
 	float m_fov;
+
+	void OnUpdate(float dt) override {}
+	void OnMessage(const std::string m) override 
+	{
+		/*if (m == "rotateLeft")
+		{
+			rotate(-ADJUSTMENT_VALUE, YAXIS);
+		}
+		else if (m == "rotateRight")
+		{
+			rotate(ADJUSTMENT_VALUE, YAXIS);
+		}
+		else if (m == "rotateUp")
+		{
+			rotate(-ADJUSTMENT_VALUE, XAXIS);
+		}
+		else if (m == "rotateDown")
+		{
+			rotate(ADJUSTMENT_VALUE, XAXIS);
+		}
+		else if (m == "translateLeft")
+		{
+			translate(TRANSLATELEFT_VALUE);
+		}
+		else if (m == "translateRight")
+		{
+			translate(TRANSLATERIGHT_VALUE);
+		}
+		else if (m == "translateUp")
+		{
+			translate(TRANSLATEUP_VALUE);
+		}
+		else if (m == "translateDown")
+		{
+			translate(TRANSLATEDOWN_VALUE);
+		}*/
+	}
 
 	CameraComponent() : m_position(0), m_orientation(1, 0, 0, 0), m_fov(45) {}
 

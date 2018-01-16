@@ -10,6 +10,7 @@ class ModelComponent : public Components
 
 public:
 	Model* themodel;
-
+	void OnUpdate(float dt) override {}
+	void OnMessage(const std::string m) override {}
 };
 

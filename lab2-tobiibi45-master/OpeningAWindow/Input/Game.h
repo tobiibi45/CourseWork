@@ -2,8 +2,6 @@
 #include "IEngineCore.h"
 #include "InputHandler.h"
 #include "Scene.h"
-#include "Camera.h"
-#include "Model.h"
 
 class Game
 {
@@ -16,8 +14,4 @@ public:
 
 	virtual void update(float dt) = 0;
 	virtual void render() = 0;
-
-private:
-	Camera m_camera;
-	Model *theModel;
 };

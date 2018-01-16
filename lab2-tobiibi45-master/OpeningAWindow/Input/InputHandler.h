@@ -3,13 +3,14 @@
 #include "GameObject.h"
 #include <vector>
 #include "TransformComponent.h"
+#include "CameraComponent.h"
 
 
 class InputCommand
 {
 public:
 	virtual ~InputCommand() {}
-	virtual void execute(GameObject& playerBackground) = 0;
+	virtual void execute(GameObject& gameobject) = 0;
 };
 
 
@@ -116,12 +117,13 @@ public:
 
 struct InputHandler
 {
-	//GameObject* m_playerBackground;
-	GameObject* m_playerCube;
+	GameObject* m_gameobjects;
+	std::vector<GameObject*> v_objectsRequiringInput;
 
 	std::map<int, InputCommand*> m_controlMapping;
 
-	InputHandler(GameObject* playerCube) : m_playerCube(playerCube)
+
+	InputHandler(GameObject* gameobjects) : m_gameobjects(gameobjects)
 	{
 		// the idea will be to map the keys directly from a config file that can be loaded in
 		// and changed on the fly
@@ -143,7 +145,7 @@ struct InputHandler
 		{
 			if (keyBuffer[mapEntry.first])
 			{
-				mapEntry.second->execute(*m_playerCube);
+				mapEntry.second->execute(*m_gameobjects);
 			}
 		}
 

@@ -21,9 +21,9 @@ int main(int argc, char* argv[])
 	if (!engineCore->initWindow(800, 600, "InputExample"))
 		return -1;
 
-	Game myFirstGame;
+	Game* game;
 
-	engineCore->runEngine(myFirstGame);
+	engineCore->runEngine(&game);
 
 	return 0;
 }

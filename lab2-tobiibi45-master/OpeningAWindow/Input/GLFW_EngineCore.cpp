@@ -83,7 +83,7 @@ bool GLFW_EngineCore::runEngine(Game& game)
 		// check if we have set up any input handling
 		game.m_inputHandler->handleInputs(m_keyBuffer);
 
-		game.update(); // update game logic
+		game.update(1); // update game logic
 		game.render(); // prepare game to send info to the renderer in engine core
 
 					   // swap buffers
@@ -158,7 +158,7 @@ void GLFW_EngineCore::renderText(std::string text, float x, float y, float scale
 }
 
 
-void GLFW_EngineCore::setCamera(const Camera* cam)
+void GLFW_EngineCore::setCamera(const CameraComponent* cam)
 {
 	// set the view and projection components of our shader to the camera values
 	glm::mat4 projection = glm::perspective(glm::radians(cam->m_fov), (float)m_screenWidth / (float)m_screenHeight, 0.1f, 10000.0f);

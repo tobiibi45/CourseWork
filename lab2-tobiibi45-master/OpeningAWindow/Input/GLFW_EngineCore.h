@@ -4,7 +4,7 @@
 #include <GLFW/glfw3.h>
 #include <vector>
 #include <glm/mat4x4.hpp>
-#include "Camera.h"
+#include "CameraComponent.h"
 #include <map>
 
 
@@ -23,7 +23,7 @@ public:
 	void renderColouredBackground(float r, float g, float b) override;
 	void renderText(std::string text, float x, float y, float scale, glm::vec3 colour) override;
 
-	void setCamera(const Camera* cam) override;
+	void setCamera(const CameraComponent* cam) override;
 	void drawCube(const glm::mat4& modelMatrix) override;
 	void drawModel(Model* model, const glm::mat4& modelMatrix) override;
 

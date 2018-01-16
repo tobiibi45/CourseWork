@@ -3,6 +3,9 @@
 #pragma once
 #include "Components.h"
 #include "ColourComponent.h"
+#include "TransformComponent.h"
+#include "ModelComponent.h"
+#include "CameraComponent.h"
 #include <unordered_map>
 #include <typeindex>
 
@@ -32,6 +35,10 @@ public:
 		// add the component to unoreder map with hash of its typeid
 		m_components[typeid(T)] = comp;
 	}
+
+	virtual void OnUpdate(float dt) = 0;
+	virtual void OnMessage(const std::string msg) = 0;
+
 
 private:
 	std::unordered_map<std::type_index, Components*> m_components;
