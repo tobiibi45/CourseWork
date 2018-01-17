@@ -247,6 +247,7 @@
     <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="stb_image.c" />
   </ItemGroup>
@@ -267,6 +268,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelComponent.h" />
+    <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="TransformComponent.h" />
