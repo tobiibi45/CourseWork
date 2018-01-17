@@ -81,7 +81,7 @@ bool GLFW_EngineCore::runEngine(Game& game)
 	while (!glfwWindowShouldClose(m_window))
 	{
 		// check if we have set up any input handling
-		game.m_inputHandler->handleInputs(m_keyBuffer);
+		//game.m_inputHandler->handleInputs(m_keyBuffer);
 
 		game.update(1); // update game logic
 		game.render(); // prepare game to send info to the renderer in engine core

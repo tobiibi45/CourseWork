@@ -1,18 +1,19 @@
 #pragma once
 
 #include "GameObject.h"
-#include "Camera.h"
+#include "CameraComponent.h"
+#include "IEngineCore.h"
 
 class Scene
 {
 public:
-	Scene();
+	Scene() {};
 
-	void update();
-	void render(IEngineCore* m_engineInterfacePtr);
+	virtual void update() = 0;
+	virtual void render(IEngineCore* m_engineInterfacePtr) = 0;
 
-	void cleanup();
+	virtual void cleanup() = 0;
 
 	std::vector<GameObject*> v_gameObjects;
-	CameraComponent* m_camera;
+	//CameraComponent* m_camera;
 };

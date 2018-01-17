@@ -1,12 +1,12 @@
-#include "Game.h"
-#include "TransformComponent.h"
-#include "ColourComponent.h"
+//#include "Game.h"
+//#include "TransformComponent.h"
+//#include "ColourComponent.h"
 
-Game::Game()
-{
+//Game::Game()
+//{
 	
 
-}
+//}
 
 //void Game::update()
 //{

@@ -11,7 +11,8 @@
 
 FirstGame::FirstGame()
 {
-	loadLevelJSON("assets/levels/level1");
+	//loadLevelJSON("assets/levels/level1");
+	m_currentScene = new GameScene;
 	m_engineInterfacePtr = nullptr;
 
 }
@@ -31,16 +32,16 @@ void FirstGame::render()
 
 bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 {
-	Model* player = new Model("assets/models/duck/duck.dae");
-	Model* floor = new Model("assets/models/duck/floor.dae");
+	mm.addModel("duck.dae");
+	mm.addModel("floor.dae");
+	//Model* player = new Model("assets/models/duck/duck.dae");
+	//Model* floor = new Model("assets/models/duck/floor.dae");
 
 	if (m_currentScene)
 	{
 		m_currentScene->cleanup();
 		delete m_currentScene;
 	}
-
-	m_currentScene = new Scene;
 
 	std::ifstream jsonData;
 	Json::Value root;
@@ -62,11 +63,12 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 
 		if (name == "duck")
 		{
-			
+			mm.getModel("duck.dae");
+
 		}
 		else if (name == "floor")
 		{
-
+			mm.getModel("floor.dae");
 		}
 
 		float w, x, y, z;
@@ -117,9 +119,9 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 
 		if (type == "PlayerCharacter")
 		{
-			m_currentScene->v_gameObjects.push_back(new PlayerCharacter());
-			m_currentScene->m_camera = m_currentScene->v_gameObjects[i]->getComponent<CameraComponent>();
-			m_inputHandler->v_objectsRequiringInput.push_back(m_currentScene->v_gameObjects[i]);
+			m_currentscene->v_gameObjects.push_back(new PlayerCharacter());
+			m_currentscene->m_camera = m_currentScene->v_gameObjects[i]->getComponent<CameraComponent>();
+			//m_inputHandler->v_objectsRequiringInput.push_back(m_currentScene->v_gameObjects[i]);
 		}
 		else if (type == "StaticEnvironmentObject")
 		{

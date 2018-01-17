@@ -6,7 +6,7 @@
 class Game
 {
 public:
-	Game();
+	Game() {};
 	virtual ~Game() {}
 	IEngineCore* m_engineInterfacePtr;
 	InputHandler* m_inputHandler;
