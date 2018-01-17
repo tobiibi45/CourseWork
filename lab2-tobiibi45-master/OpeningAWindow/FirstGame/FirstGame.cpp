@@ -7,24 +7,33 @@
 #include <GameObject.h>
 #include "GameObjects.h"
 #include <InputHandler.h>
+#include <Model.h>
 
 FirstGame::FirstGame()
 {
+	loadLevelJSON("assets/levels/level1");
+	m_engineInterfacePtr = nullptr;
 
 }
 
 void FirstGame::update(float dt)
 {
+	
 
 }
 
 void FirstGame::render()
 {
-
+	// perform all the logic for your game world
+	if (m_currentScene)
+		m_currentScene->render(m_engineInterfacePtr);
 }
 
 bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 {
+	Model* player = new Model("assets/models/duck/duck.dae");
+	Model* floor = new Model("assets/models/duck/floor.dae");
+
 	if (m_currentScene)
 	{
 		m_currentScene->cleanup();
@@ -49,34 +58,18 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
-	
-		string type = gameObjects[i]["type"].asString();
+		string name = gameObjects[i]["name"].asString();
 
-		if (type == "PlayerCharacter")
+		if (name == "duck")
 		{
-			m_currentScene->v_gameObjects.push_back(new PlayerCharacter());
-			m_currentScene->m_camera = m_currentScene->v_gameObjects[i]->getComponent<CameraComponent>();
-			m_inputHandler->v_objectsRequiringInput.push_back(m_currentScene->v_gameObjects[i]);
+			
 		}
-		else if (type == "StaticEnvironmentObject")
+		else if (name == "floor")
 		{
-			m_currentScene->v_gameObjects.push_back(new StaticEnvironmentObject());
-		}
-		else
-		{
-			std::cout << type << ": unknown type\n";
-			continue; // not an object we can create
+
 		}
 
 		float w, x, y, z;
-		// has to have a position node
-		const Json::Value posNode = gameObjects[i]["position"];
-		x = posNode[0].asFloat();
-		y = posNode[1].asFloat();
-		z = posNode[2].asFloat();
-
-		glm::vec3 pos(x, y, z);
-
 		const Json::Value orientNode = gameObjects[i]["orientation"];
 
 		// check if the node exists
@@ -93,6 +86,14 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 		}
 
 		glm::quat orient(w, x, y, z);
+
+		// has to have a position node
+		const Json::Value posNode = gameObjects[i]["position"];
+		x = posNode[0].asFloat();
+		y = posNode[1].asFloat();
+		z = posNode[2].asFloat();
+
+		glm::vec3 pos(x, y, z);
 
 		const Json::Value scaleNode = gameObjects[i]["scale"];
 
@@ -111,6 +112,24 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 		glm::vec3 scale(x, y, z);
 
 		m_currentScene->v_gameObjects[i]->addComponent(new TransformComponent(pos, orient, scale));
+
+		string type = gameObjects[i]["type"].asString();
+
+		if (type == "PlayerCharacter")
+		{
+			m_currentScene->v_gameObjects.push_back(new PlayerCharacter());
+			m_currentScene->m_camera = m_currentScene->v_gameObjects[i]->getComponent<CameraComponent>();
+			m_inputHandler->v_objectsRequiringInput.push_back(m_currentScene->v_gameObjects[i]);
+		}
+		else if (type == "StaticEnvironmentObject")
+		{
+			m_currentScene->v_gameObjects.push_back(new StaticEnvironmentObject());
+		}
+		else
+		{
+			std::cout << type << ": unknown type\n";
+			continue; // not an object we can create
+		}
 
 		std::cout << gameObjects[i]["name"].asString() << "-" << type << " loaded\n";
 

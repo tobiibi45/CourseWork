@@ -245,11 +245,10 @@
     <ClCompile Include="GLAD\glad.c" />
     <ClCompile Include="GLFW_EngineCore.cpp" />
     <ClCompile Include="jsoncpp.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="stb_image.cpp" />
+    <ClCompile Include="stb_image.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
