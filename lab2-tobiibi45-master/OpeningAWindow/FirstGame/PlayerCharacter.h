@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "MyGameObjects.h"
 class PlayerCharacter : public GameObject
 {
 	enum class CameraViewState { firstPersonCamera, thirdPersonCamera };
@@ -11,6 +11,7 @@ public:
 	void OnUpdate(float dt) override;
 	void OnMessage(const std::string msg) override;
 
-	CameraViewState m_cameraState;
+	CameraViewState m_cameraState;
+
 };
 

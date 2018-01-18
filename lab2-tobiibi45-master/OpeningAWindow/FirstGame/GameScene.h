@@ -2,6 +2,8 @@
 #include "Scene.h"
 #include <IEngineCore.h>
 #include <CameraComponent.h>
+#include <GameObject.h>
+
 class GameScene : public Scene
 {
 public:
@@ -14,6 +16,8 @@ public:
 	void cleanup() override;
 
 	CameraComponent* m_camera;
+	std::vector<GameObject*> v_gameObjects;
+
 
 };
 

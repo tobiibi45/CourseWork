@@ -14,110 +14,111 @@ public:
 };
 
 
-class RotateLeftCommand : public InputCommand
+class RotateCameraLeft : public InputCommand
 {
 public:
-	void execute(GameObject& playerCube) override
+	void execute(GameObject& gameobject) override
 	{
-		if (playerCube.getComponent<TransformComponent>())
-			playerCube.getComponent<TransformComponent>()->OnMessage("rotateLeft");
+		if (gameobject.getComponent<CameraComponent>())
+			gameobject.getComponent<CameraComponent>()->OnMessage("rotateCameraLeft");
 	}
 };
 
-class RotateRightCommand : public InputCommand
+class RotateCameraRight : public InputCommand
 {
 public:
-	void execute(GameObject& playerCube) override
+	void execute(GameObject& gameobject) override
 	{
-		if (playerCube.getComponent<TransformComponent>())
-			playerCube.getComponent<TransformComponent>()->OnMessage("rotateRight");
+		if (gameobject.getComponent<CameraComponent>())
+			gameobject.getComponent<CameraComponent>()->OnMessage("rotateCameraRight");
 	}
 };
 
-class rotateUpCommand : public InputCommand
+class RotateCameraUp : public InputCommand
 {
 public:
-	void execute(GameObject& cube) override
+	void execute(GameObject& gameobject) override
 	{
-		if (cube.getComponent<TransformComponent>())
-			cube.getComponent<TransformComponent>()->OnMessage("rotateUp");
+		if (gameobject.getComponent<CameraComponent>())
+			gameobject.getComponent<CameraComponent>()->OnMessage("rotateCameraUp");
 	}
 
 };
-class rotateDownCommand : public InputCommand
+class RotateCameraDown : public InputCommand
 {
 public:
-	void execute(GameObject& cube) override
+	void execute(GameObject& gameobject) override
 	{
-		if (cube.getComponent<TransformComponent>())
-			cube.getComponent<TransformComponent>()->OnMessage("rotateDown");
-	}
-
-};
-
-class scaleUpCommand : public InputCommand
-{
-public:
-	void execute(GameObject& cube) override
-	{
-		if (cube.getComponent<TransformComponent>())
-			cube.getComponent<TransformComponent>()->OnMessage("scaleUp");
-	}
-
-};
-class scaleDownCommand : public InputCommand
-{
-public:
-	void execute(GameObject& cube) override
-	{
-		if (cube.getComponent<TransformComponent>())
-			cube.getComponent<TransformComponent>()->OnMessage("scaleDown");
+		if (gameobject.getComponent<CameraComponent>())
+			gameobject.getComponent<CameraComponent>()->OnMessage("rotateCameraDown");
 	}
 
 };
 
-class TranslateLeftCommand : public InputCommand
+class MovePlayerLeft : public InputCommand
 {
 public:
-	void execute(GameObject& playerCube) override
+	void execute(GameObject& gameobject) override
 	{
-		if (playerCube.getComponent<TransformComponent>())
-			playerCube.getComponent<TransformComponent>()->OnMessage("translateLeft");
+		if (gameobject.getComponent<CameraComponent>())
+			gameobject.getComponent<CameraComponent>()->OnMessage("MovePlayerLeft");
+	}
+
+};
+class MovePlayerRight : public InputCommand
+{
+public:
+	void execute(GameObject& gameobject) override
+	{
+		if (gameobject.getComponent<CameraComponent>())
+			gameobject.getComponent<CameraComponent>()->OnMessage("MovePlayerRight");
+	}
+
+};
+
+class MovePlayerForward : public InputCommand
+{
+public:
+	void execute(GameObject&gameobject) override
+	{
+		if (gameobject.getComponent<CameraComponent>())
+			gameobject.getComponent<CameraComponent>()->OnMessage("MovePlayerForward");
 	}
 };
 
-class TranslateRightCommand : public InputCommand
+class MovePlayerBack : public InputCommand
 {
 public:
-	void execute(GameObject& playerCube) override
+	void execute(GameObject& gameobject) override
 	{
-		if (playerCube.getComponent<TransformComponent>())
-			playerCube.getComponent<TransformComponent>()->OnMessage("translateRight");
+		if (gameobject.getComponent<CameraComponent>())
+			gameobject.getComponent<CameraComponent>()->OnMessage("MovePlayerBack");
 	}
 };
-class TranslateUpCommand : public InputCommand
+class FirstPersonCamera : public InputCommand
 {
 public:
-	void execute(GameObject& playerCube) override
+	void execute(GameObject& gameobject) override
 	{
-		if (playerCube.getComponent<TransformComponent>())
-			playerCube.getComponent<TransformComponent>()->OnMessage("translateUp");
+		if (gameobject.getComponent<CameraComponent>())
+			gameobject.getComponent<CameraComponent>()->OnMessage("FirstPersonCamera");
 	}
 };
 
-class TranslateDownCommand : public InputCommand
+class ThirdPersonCamera : public InputCommand
 {
 public:
-	void execute(GameObject& playerCube) override
+	void execute(GameObject& gameobject) override
 	{
-		if (playerCube.getComponent<TransformComponent>())
-			playerCube.getComponent<TransformComponent>()->OnMessage("translateDown");
+		if (gameobject.getComponent<CameraComponent>())
+			gameobject.getComponent<CameraComponent>()->OnMessage("ThirdPersonCamera");
 	}
 };
 
 struct InputHandler
 {
 	GameObject* m_gameobjects;
+
 	std::vector<GameObject*> v_objectsRequiringInput;
 
 	std::map<int, InputCommand*> m_controlMapping;
@@ -127,16 +128,16 @@ struct InputHandler
 	{
 		// the idea will be to map the keys directly from a config file that can be loaded in
 		// and changed on the fly
-		m_controlMapping[65] = new RotateLeftCommand;
-		m_controlMapping[68] = new RotateRightCommand;
-		m_controlMapping[87] = new rotateUpCommand;
-		m_controlMapping[83] = new rotateDownCommand;
-		m_controlMapping[90] = new scaleUpCommand;
-		m_controlMapping[88] = new scaleDownCommand;
-		m_controlMapping[69] = new TranslateLeftCommand;
-		m_controlMapping[81] = new TranslateRightCommand;
-		m_controlMapping[82] = new TranslateUpCommand;
-		m_controlMapping[84] = new TranslateDownCommand;
+		m_controlMapping[65] = new RotateCameraLeft;
+		m_controlMapping[68] = new RotateCameraRight;
+		m_controlMapping[87] = new RotateCameraUp;
+		m_controlMapping[83] = new RotateCameraDown;
+		m_controlMapping[90] = new MovePlayerLeft;
+		m_controlMapping[88] = new MovePlayerRight;
+		m_controlMapping[69] = new MovePlayerForward;
+		m_controlMapping[81] = new MovePlayerBack;
+		m_controlMapping[82] = new FirstPersonCamera;
+		m_controlMapping[84] = new ThirdPersonCamera;
 	}
 
 	void handleInputs(const std::vector<bool>& keyBuffer)
@@ -151,4 +152,3 @@ struct InputHandler
 
 	}
 };
-

@@ -241,7 +241,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GLAD\glad.c" />
     <ClCompile Include="GLFW_EngineCore.cpp" />
     <ClCompile Include="jsoncpp.cpp" />
@@ -251,7 +250,6 @@
     <ClCompile Include="stb_image.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="ColourComponent.h" />
     <ClInclude Include="Components.h" />

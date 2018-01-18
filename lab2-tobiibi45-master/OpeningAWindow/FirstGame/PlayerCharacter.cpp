@@ -23,7 +23,8 @@ void PlayerCharacter::OnUpdate(float dt)
 			getComponent<CameraComponent>()->m_position = -1.0f * transform->m_position;
 			getComponent<CameraComponent>()->m_orientation = inverse(transform->m_orientation);
 			break;
-		}		case CameraViewState::thirdPersonCamera:
+		}
+		case CameraViewState::thirdPersonCamera:
 		{
 			// get the transform component details
 			TransformComponent* transform = getComponent<TransformComponent>();
@@ -33,7 +34,9 @@ void PlayerCharacter::OnUpdate(float dt)
 				-1.0f*(transform->m_position + glm::vec3(0, 150, 500) * inverseOrientation);
 			getComponent<CameraComponent>()->m_orientation = inverseOrientation;
 			break;
-		}	}
+		}
+	}
+
 }
 void PlayerCharacter::OnMessage(const std::string msg)
 {
@@ -44,7 +47,8 @@ void PlayerCharacter::OnMessage(const std::string msg)
 	else if (msg == "SetCameraThirdPerson")
 	{
 		m_cameraState = CameraViewState::thirdPersonCamera;
-	}	else if (msg.compare(0, 12, "rotateCamera") == 0)
+	}
+	else if (msg.compare(0, 12, "rotateCamera") == 0)
 	{
 		TransformComponent* transform = getComponent<TransformComponent>();
 		float rotationValue;
@@ -52,7 +56,8 @@ void PlayerCharacter::OnMessage(const std::string msg)
 		else rotationValue = 0.05;
 		// same rotation for both first and third person cameras
 		transform->yaw(rotationValue);
-	}	else if (msg.compare(0, 10, "movePlayer") == 0)
+	}
+	else if (msg.compare(0, 10, "movePlayer") == 0)
 	{
 		// determine the correct translation vector
 		glm::vec3 translationVector(0, 0, 0);

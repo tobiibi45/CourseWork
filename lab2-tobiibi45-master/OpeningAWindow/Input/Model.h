@@ -9,7 +9,7 @@
 class Model
 {
 public:
-
+	Model() {}
 	Model(string filepath);
 
 	void render(const unsigned int shaderProgram);

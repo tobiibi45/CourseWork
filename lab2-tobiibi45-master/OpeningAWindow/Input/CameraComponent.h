@@ -18,43 +18,6 @@ public:
 	glm::quat m_orientation;
 	float m_fov;
 
-	void OnUpdate(float dt) override {}
-	void OnMessage(const std::string m) override 
-	{
-		/*if (m == "rotateLeft")
-		{
-			rotate(-ADJUSTMENT_VALUE, YAXIS);
-		}
-		else if (m == "rotateRight")
-		{
-			rotate(ADJUSTMENT_VALUE, YAXIS);
-		}
-		else if (m == "rotateUp")
-		{
-			rotate(-ADJUSTMENT_VALUE, XAXIS);
-		}
-		else if (m == "rotateDown")
-		{
-			rotate(ADJUSTMENT_VALUE, XAXIS);
-		}
-		else if (m == "translateLeft")
-		{
-			translate(TRANSLATELEFT_VALUE);
-		}
-		else if (m == "translateRight")
-		{
-			translate(TRANSLATERIGHT_VALUE);
-		}
-		else if (m == "translateUp")
-		{
-			translate(TRANSLATEUP_VALUE);
-		}
-		else if (m == "translateDown")
-		{
-			translate(TRANSLATEDOWN_VALUE);
-		}*/
-	}
-
 	CameraComponent() : m_position(0), m_orientation(1, 0, 0, 0), m_fov(45) {}
 
 	CameraComponent(const glm::vec3& pos) : m_position(pos), m_orientation(1, 0, 0, 0), m_fov(45) {}
@@ -78,5 +41,8 @@ public:
 	void roll(float angle) { rotate(angle, 0.0f, 0.0f, 1.0f); }
 
 	void setFOV(float fov) { m_fov = fov; }
+
+	void OnUpdate(float dt) override {};
+	void OnMessage(const std::string m) override {};
 
 };
