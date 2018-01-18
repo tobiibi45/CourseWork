@@ -7,14 +7,11 @@
 #include <GameObject.h>
 #include "MyGameObjects.h"
 #include <InputHandler.h>
-#include <Model.h>
 
 FirstGame::FirstGame()
 {
 	loadLevelJSON("assets/levels/level1.json");
 	m_engineInterfacePtr = nullptr;
-
-
 }
 
 void FirstGame::update(float dt)
@@ -32,6 +29,7 @@ void FirstGame::render()
 
 bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 {
+	
 
 	if (m_currentscene)
 	{
@@ -105,11 +103,18 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 		{
 			m_currentscene->v_gameObjects.push_back(new PlayerCharacter());
 			m_currentscene->m_camera = m_currentscene->v_gameObjects[i]->getComponent<CameraComponent>();
-			//m_inputHandler->v_objectsRequiringInput.push_back(m_currentscene->v_gameObjects[i]);
+			m_inputHandler = new InputHandler(m_currentscene->v_gameObjects[i]);
+			ModelComponent* PC = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
+			mm.load_model("duck.dae");
+			PC->themodel = (mm.get_model("duck.dae"));
+			
 		}
 		else if (type == "StaticEnvironmentObject")
 		{
 			m_currentscene->v_gameObjects.push_back(new StaticEnvironmentObject());
+			ModelComponent* SEO = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
+			mm.load_model("floor.dae");
+			SEO->themodel = (mm.get_model("floor.dae"));
 		}
 		else
 		{
@@ -117,24 +122,9 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 			continue; // not an object we can create
 		}
 
-		string name = gameObjects[i]["name"].asString();
-
-		if (name == "duck")
-		{
-			m_currentscene->v_gameObjects[i]->addComponent(new ModelComponent());
-			mm.load_model("duck.dae");
-			mm.get_model("duck.dae");
-		}
-		else if (name == "floor")
-		{
-
-		}
-
 		m_currentscene->v_gameObjects[i]->addComponent(new TransformComponent(pos, orient, scale));
 
 		std::cout << gameObjects[i]["name"].asString() << "-" << type << " loaded\n";
-
-
 
 	}
 

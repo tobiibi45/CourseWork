@@ -17,28 +17,25 @@ bool ModelManager::load_model(const std::string file_path)
 		std::cout << "Already in map " << file_path << '\n';
 		return true;
 	}
-	load_models[file_path] = Model(load_path + file_path);
-	std::cout << "Not Found, Adding!!  " << file_path << '\n';
+	load_models[file_path] = load_path + file_path;
+	std::cout << "Not Found, Adding!!  " << file_path << ":" << load_path + file_path << '\n';
 	return false;
 }
 
-Model ModelManager::get_model(const std::string name)
+Model* ModelManager::get_model(const std::string model_name)
 {
-	Model* model;
 	try
 	{
-
-		if (load_models.find(name) != load_models.end())
+		if (load_models.find(model_name) != load_models.end())
 		{
-			load_model(name);
-			auto model = new Model(name);
+			std::cout << "Found Model  " << model_name << '\n';
+		
 		}
-		throw "Model not Found";
 	}
 	catch (const char e)
 	{
-		std::cout << " exception occured, Model with name  " << name <<" is not loaded " << endl << e;
+		std::cout << " exception occured, Model with name  " << model_name <<" is not loaded " << endl << e;
 	}
 
-	return load_models.at(load_path + name);
+	return new Model(load_models.at(model_name));
 }

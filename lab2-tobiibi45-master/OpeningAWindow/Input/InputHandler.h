@@ -124,7 +124,7 @@ struct InputHandler
 	std::map<int, InputCommand*> m_controlMapping;
 
 
-	InputHandler(GameObject* gameobjects) : m_gameobjects(gameobjects)
+	InputHandler(GameObject* objectsRequiringInput) : m_gameobjects(objectsRequiringInput)
 	{
 		// the idea will be to map the keys directly from a config file that can be loaded in
 		// and changed on the fly

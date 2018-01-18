@@ -11,9 +11,9 @@ public:
 	ModelManager();
 
 	bool load_model(const std::string file_path);
-	Model get_model(const std::string name);
+	Model* get_model(const std::string model_name);
 
-	std::string load_path = "assets/models/";
+	const std::string load_path = "assets/models/";
 	std::map<string, Model> load_models;
 	std::map<string, Model>::iterator it;
 };
