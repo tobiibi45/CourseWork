@@ -21,7 +21,12 @@ void GameScene::render(IEngineCore * m_engineInterfacePtr)
 	m_engineInterfacePtr->renderColouredBackground(0, 0, 0);
 
 	// update the camera (probably don't need to do this each frame)
-	m_engineInterfacePtr->setCamera(v_gameObjects[1]->getComponent<CameraComponent>());
+	/*for (int i = 0; i < v_gameObjects.size(); i++)
+	{
+		m_engineInterfacePtr->setCamera(v_gameObjects[i]->getComponent<CameraComponent>());
+	}*/
+	m_engineInterfacePtr->setCamera(m_camera);
+	
 
 	// draw the models
 	for (auto gameobjects : v_gameObjects)

@@ -59,6 +59,8 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 
 	m_currentscene = new GameScene();
 	m_inputHandler = new InputHandler();
+	m_currentscene->m_camera = new CameraComponent();
+	
 
 	std::ifstream jsonData;
 	Json::Value root;
@@ -126,8 +128,7 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 			if (name == "duck")
 			{
 				m_currentscene->v_gameObjects.push_back(new PlayerCharacter());
-				m_currentscene->v_gameObjects[i]->addComponent(new CameraComponent);
-				//m_currentscene->m_camera = m_currentscene->v_gameObjects[i]->getComponent<CameraComponent>();
+				m_currentscene->m_camera = m_currentscene->v_gameObjects[i]->getComponent<CameraComponent>();
 				trans = m_currentscene->v_gameObjects[i]->getComponent<TransformComponent>();
 				m_inputHandler->addObjects(m_currentscene->v_gameObjects[i]);
 				ModelComponent* duck = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
@@ -138,6 +139,7 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 			{
 				m_currentscene->v_gameObjects.push_back(new PlayerCharacter());
 			//	m_currentscene->m_camera = m_currentscene->v_gameObjects[i]->getComponent<CameraComponent>();
+				trans = m_currentscene->v_gameObjects[i]->getComponent<TransformComponent>();
 				m_inputHandler->addObjects(m_currentscene->v_gameObjects[i]);
 				ModelComponent* deer = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
 				mm.load_model("bigdeer.obj");
@@ -182,8 +184,8 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 			{
 				m_currentscene->v_gameObjects.push_back(new DynamicEnvironmentObject());
 				ModelComponent* ball = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
-				mm.load_model("ball.obj");
-				ball->themodel = (mm.get_model("ball.obj"));
+				mm.load_model("Ball OBJ.obj");
+				ball->themodel = (mm.get_model("Ball OBJ.obj"));
 			}
 		}
 		else
