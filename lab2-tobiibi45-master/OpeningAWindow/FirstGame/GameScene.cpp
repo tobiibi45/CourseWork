@@ -21,7 +21,7 @@ void GameScene::render(IEngineCore * m_engineInterfacePtr)
 	m_engineInterfacePtr->renderColouredBackground(0, 0, 0);
 
 	// update the camera (probably don't need to do this each frame)
-	m_engineInterfacePtr->setCamera(m_camera);
+	m_engineInterfacePtr->setCamera(v_gameObjects[1]->getComponent<CameraComponent>());
 
 	// draw the models
 	for (auto gameobjects : v_gameObjects)

@@ -20,8 +20,8 @@ public:
 	void execute(GameObject& gameobject) override
 	{
 		if (gameobject.getComponent<CameraComponent>())
-			gameobject.getComponent<CameraComponent>()->OnMessage("rotateCameraRight");
-		std::cout << "Pressing Left Arrow" << "/n";
+			gameobject.OnMessage("rotateCameraLeft");
+		std::cout << "CameraLeft" << "/n";
 	}
 };
 
@@ -31,40 +31,21 @@ public:
 	void execute(GameObject& gameobject) override
 	{
 		if (gameobject.getComponent<CameraComponent>())
-			gameobject.getComponent<CameraComponent>()->OnMessage("rotateCameraRight");
+			gameobject.OnMessage("rotateCameraRight");
+		std::cout << "CameraRight" << "/n";
 	}
 };
 
-class RotateCameraUp : public InputCommand
-{
-public:
-	void execute(GameObject& gameobject) override
-	{
-		if (gameobject.getComponent<CameraComponent>())
-			gameobject.getComponent<CameraComponent>()->OnMessage("rotateCameraUp");
-	}
-
-};
-class RotateCameraDown : public InputCommand
-{
-public:
-	void execute(GameObject& gameobject) override
-	{
-		if (gameobject.getComponent<CameraComponent>())
-			gameobject.OnMessage("rotateCameraDown");
-	}
-
-};
 
 class MovePlayerLeft : public InputCommand
 {
 public:
 	void execute(GameObject& gameobject) override
 	{
-		if (gameobject.getComponent<CameraComponent>())
+		if (gameobject.getComponent<TransformComponent>())
 			gameobject.OnMessage("MovePlayerLeft");
+		std::cout << "Pressing Left Arrow" << "/n";
 	}
-
 };
 class MovePlayerRight : public InputCommand
 {
@@ -127,16 +108,14 @@ struct InputHandler
 
 			// the idea will be to map the keys directly from a config file that can be loaded in
 			// and changed on the fly
-			m_controlMapping[37] = new RotateCameraLeft; // Left Arrow
-			m_controlMapping[39] = new RotateCameraRight; // Right Arrow
-			m_controlMapping[38] = new RotateCameraUp; // Up Arrow
-			m_controlMapping[40] = new RotateCameraDown; // Down Arrow
+			m_controlMapping[79] = new RotateCameraLeft; // Left Arrow
+			m_controlMapping[80] = new RotateCameraRight; // Right Arrow
 			m_controlMapping[65] = new MovePlayerLeft; // A
 			m_controlMapping[68] = new MovePlayerRight; // D
 			m_controlMapping[87] = new MovePlayerForward; // W
 			m_controlMapping[83] = new MovePlayerBack; // S
-			m_controlMapping[49] = new FirstPersonCamera; // 1
-			m_controlMapping[50] = new ThirdPersonCamera; // 2
+			m_controlMapping[70] = new FirstPersonCamera; // 1
+			m_controlMapping[84] = new ThirdPersonCamera; // 2
 		}
 
 	void handleInputs(const std::vector<bool>& keyBuffer)

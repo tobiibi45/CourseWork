@@ -55,16 +55,17 @@ void PlayerCharacter::OnMessage(const std::string msg)
 		if (msg == "rotateCameraLeft") rotationValue = -0.05;
 		else rotationValue = 0.05;
 		// same rotation for both first and third person cameras
-		transform->yaw(rotationValue);
+		getComponent<TransformComponent>()->yaw(rotationValue);
+
 	}
-	else if (msg.compare(0, 10, "movePlayer") == 0)
+	else if (msg.compare(0, 10, "MovePlayer") == 0)
 	{
 		// determine the correct translation vector
 		glm::vec3 translationVector(0, 0, 0);
-		if (msg == "movePlayerForward")translationVector.z = -10;
-		else if (msg == "movePlayerBackward")translationVector.z = 10;
-		else if (msg == "movePlayerLeft")translationVector.x = -10;
-		else if (msg == "movePlayerRight")translationVector.x = 10;
+		if (msg == "MovePlayerForward")translationVector.z = -10;
+		else if (msg == "MovePlayerBack")translationVector.z = 10;
+		else if (msg == "MovePlayerLeft")translationVector.x = -10;
+		else if (msg == "MovePlayerRight")translationVector.x = 10;
 		TransformComponent* transform = getComponent<TransformComponent>();
 		transform->translate(translationVector
 			* inverse(transform->m_orientation));

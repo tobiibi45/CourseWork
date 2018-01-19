@@ -12,11 +12,12 @@ FirstGame::FirstGame() : scene_change(SceneChange::firstScene)
 {
 	loadLevelJSON("assets/levels/level1.json");
 	m_engineInterfacePtr = nullptr;
+
 }
 
 void FirstGame::update(float dt)
 {
-	PlayerCharacter player;
+	
 	player.OnUpdate(dt);
 	/*switch (scene_change)
 	{
@@ -125,7 +126,9 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 			if (name == "duck")
 			{
 				m_currentscene->v_gameObjects.push_back(new PlayerCharacter());
-				m_currentscene->m_camera = m_currentscene->v_gameObjects[i]->getComponent<CameraComponent>();
+				m_currentscene->v_gameObjects[i]->addComponent(new CameraComponent);
+				//m_currentscene->m_camera = m_currentscene->v_gameObjects[i]->getComponent<CameraComponent>();
+				trans = m_currentscene->v_gameObjects[i]->getComponent<TransformComponent>();
 				m_inputHandler->addObjects(m_currentscene->v_gameObjects[i]);
 				ModelComponent* duck = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
 				mm.load_model("duck.dae");
@@ -134,7 +137,7 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 			else if (name == "deer")
 			{
 				m_currentscene->v_gameObjects.push_back(new PlayerCharacter());
-				m_currentscene->m_camera = m_currentscene->v_gameObjects[i]->getComponent<CameraComponent>();
+			//	m_currentscene->m_camera = m_currentscene->v_gameObjects[i]->getComponent<CameraComponent>();
 				m_inputHandler->addObjects(m_currentscene->v_gameObjects[i]);
 				ModelComponent* deer = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
 				mm.load_model("bigdeer.obj");

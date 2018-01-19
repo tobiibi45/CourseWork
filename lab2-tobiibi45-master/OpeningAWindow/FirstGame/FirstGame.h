@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "GameScene.h"
 #include <ModelManager.h>
+#include "PlayerCharacter.h"
 
 class FirstGame : public Game
 {
@@ -18,5 +19,5 @@ public:
 	ModelManager mm;
 	SceneChange scene_change;
 	TransformComponent* trans;
-
+	PlayerCharacter player;
 };
