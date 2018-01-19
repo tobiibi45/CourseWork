@@ -44,5 +44,8 @@
     <ClInclude Include="MyGameObjects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameInputCommands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

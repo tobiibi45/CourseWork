@@ -8,7 +8,7 @@
 #include "MyGameObjects.h"
 #include <InputHandler.h>
 
-FirstGame::FirstGame()
+FirstGame::FirstGame() : scene_change(SceneChange::firstScene)
 {
 	loadLevelJSON("assets/levels/level1.json");
 	m_engineInterfacePtr = nullptr;
@@ -16,7 +16,26 @@ FirstGame::FirstGame()
 
 void FirstGame::update(float dt)
 {
-	
+	PlayerCharacter player;
+	player.OnUpdate(dt);
+	/*switch (scene_change)
+	{
+		case SceneChange::firstScene:
+		{
+			loadLevelJSON("assets/levels/level1.json");
+			break;
+		}
+		case SceneChange::SecondScene:
+		{
+			loadLevelJSON("assets/levels/level2.json");
+			break;
+		}
+		case SceneChange::ThirdScene:
+		{
+			loadLevelJSON("assets/levels/level3.json");
+			break;
+		}
+	}*/
 
 }
 
@@ -38,6 +57,7 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 	}
 
 	m_currentscene = new GameScene();
+	m_inputHandler = new InputHandler();
 
 	std::ifstream jsonData;
 	Json::Value root;
@@ -54,6 +74,7 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
+		string name = gameObjects[i]["name"].asString();
 
 		float w, x, y, z;
 		const Json::Value orientNode = gameObjects[i]["orientation"];
@@ -101,20 +122,66 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 
 		if (type == "PlayerCharacter")
 		{
-			m_currentscene->v_gameObjects.push_back(new PlayerCharacter());
-			m_currentscene->m_camera = m_currentscene->v_gameObjects[i]->getComponent<CameraComponent>();
-			m_inputHandler = new InputHandler(m_currentscene->v_gameObjects[i]);
-			ModelComponent* PC = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
-			mm.load_model("duck.dae");
-			PC->themodel = (mm.get_model("duck.dae"));
+			if (name == "duck")
+			{
+				m_currentscene->v_gameObjects.push_back(new PlayerCharacter());
+				m_currentscene->m_camera = m_currentscene->v_gameObjects[i]->getComponent<CameraComponent>();
+				m_inputHandler->addObjects(m_currentscene->v_gameObjects[i]);
+				ModelComponent* duck = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
+				mm.load_model("duck.dae");
+				duck->themodel = (mm.get_model("duck.dae"));
+			}
+			else if (name == "deer")
+			{
+				m_currentscene->v_gameObjects.push_back(new PlayerCharacter());
+				m_currentscene->m_camera = m_currentscene->v_gameObjects[i]->getComponent<CameraComponent>();
+				m_inputHandler->addObjects(m_currentscene->v_gameObjects[i]);
+				ModelComponent* deer = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
+				mm.load_model("bigdeer.obj");
+				deer->themodel = (mm.get_model("bigdeer.obj"));
+			}
 			
 		}
 		else if (type == "StaticEnvironmentObject")
 		{
-			m_currentscene->v_gameObjects.push_back(new StaticEnvironmentObject());
-			ModelComponent* SEO = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
-			mm.load_model("floor.dae");
-			SEO->themodel = (mm.get_model("floor.dae"));
+			if (name == "floor")
+			{
+				m_currentscene->v_gameObjects.push_back(new StaticEnvironmentObject());
+				ModelComponent* floor = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
+				mm.load_model("floor.dae");
+				floor->themodel = (mm.get_model("floor.dae"));
+			}
+			else if (name == "grass")
+			{
+				m_currentscene->v_gameObjects.push_back(new StaticEnvironmentObject());
+				ModelComponent* grass = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
+				mm.load_model("grass.obj");
+				grass->themodel = (mm.get_model("grass.obj"));
+			}
+			else if (name == "tree")
+			{
+				m_currentscene->v_gameObjects.push_back(new StaticEnvironmentObject());
+				ModelComponent* tree = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
+				mm.load_model("tree.obj");
+				tree->themodel = (mm.get_model("tree.obj"));
+			}
+			else if (name == "rock")
+			{
+				m_currentscene->v_gameObjects.push_back(new StaticEnvironmentObject());
+				ModelComponent* rock = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
+				mm.load_model("rock.obj");
+				rock->themodel = (mm.get_model("rock.obj"));
+			}
+		}
+		else if (type == "DynamicEnvironmentObject")
+		{
+			if (name == "ball")
+			{
+				m_currentscene->v_gameObjects.push_back(new DynamicEnvironmentObject());
+				ModelComponent* ball = m_currentscene->v_gameObjects[i]->getComponent<ModelComponent>();
+				mm.load_model("ball.obj");
+				ball->themodel = (mm.get_model("ball.obj"));
+			}
 		}
 		else
 		{
@@ -122,7 +189,7 @@ bool FirstGame::loadLevelJSON(std::string levelJSONFile)
 			continue; // not an object we can create
 		}
 
-		m_currentscene->v_gameObjects[i]->addComponent(new TransformComponent(pos, orient, scale));
+		//m_currentscene->v_gameObjects[i]->addComponent(new TransformComponent(pos, orient, scale));
 
 		std::cout << gameObjects[i]["name"].asString() << "-" << type << " loaded\n";
 

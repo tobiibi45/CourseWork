@@ -2,7 +2,7 @@
 
 
 
-PlayerCharacter::PlayerCharacter() : m_cameraState(CameraViewState::firstPersonCamera)
+PlayerCharacter::PlayerCharacter() : m_cameraState(CameraViewState::thirdPersonCamera)
 {
 	addComponent(new TransformComponent);
 	addComponent(new CameraComponent);

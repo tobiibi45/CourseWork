@@ -1,0 +1,40 @@
+newmtl ___Default10
+illum 4
+Kd 0.13 0.34 0.04
+Ka 0.13 0.34 0.04
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl grassFloor____Default10
+illum 4
+Kd 0.13 0.34 0.04
+Ka 0.13 0.34 0.04
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl tree_weeds_BROWN0
+illum 4
+Kd 0.01 0.00 0.00
+Ka 0.01 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl tree_weeds_GREEN2
+illum 4
+Kd 0.00 0.04 0.00
+Ka 0.00 0.04 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.00 0.01 0.00
+Ns 15.00
+newmtl tree_weeds_GREEN4
+illum 4
+Kd 0.00 0.07 0.00
+Ka 0.00 0.07 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.00 0.02 0.00
+Ns 15.00

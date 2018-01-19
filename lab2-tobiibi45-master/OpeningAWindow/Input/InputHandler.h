@@ -20,7 +20,8 @@ public:
 	void execute(GameObject& gameobject) override
 	{
 		if (gameobject.getComponent<CameraComponent>())
-			gameobject.getComponent<CameraComponent>()->OnMessage("rotateCameraLeft");
+			gameobject.getComponent<CameraComponent>()->OnMessage("rotateCameraRight");
+		std::cout << "Pressing Left Arrow" << "/n";
 	}
 };
 
@@ -50,7 +51,7 @@ public:
 	void execute(GameObject& gameobject) override
 	{
 		if (gameobject.getComponent<CameraComponent>())
-			gameobject.getComponent<CameraComponent>()->OnMessage("rotateCameraDown");
+			gameobject.OnMessage("rotateCameraDown");
 	}
 
 };
@@ -61,7 +62,7 @@ public:
 	void execute(GameObject& gameobject) override
 	{
 		if (gameobject.getComponent<CameraComponent>())
-			gameobject.getComponent<CameraComponent>()->OnMessage("MovePlayerLeft");
+			gameobject.OnMessage("MovePlayerLeft");
 	}
 
 };
@@ -70,8 +71,8 @@ class MovePlayerRight : public InputCommand
 public:
 	void execute(GameObject& gameobject) override
 	{
-		if (gameobject.getComponent<CameraComponent>())
-			gameobject.getComponent<CameraComponent>()->OnMessage("MovePlayerRight");
+		if (gameobject.getComponent<TransformComponent>())
+			gameobject.OnMessage("MovePlayerRight");
 	}
 
 };
@@ -81,8 +82,8 @@ class MovePlayerForward : public InputCommand
 public:
 	void execute(GameObject&gameobject) override
 	{
-		if (gameobject.getComponent<CameraComponent>())
-			gameobject.getComponent<CameraComponent>()->OnMessage("MovePlayerForward");
+		if (gameobject.getComponent<TransformComponent>())
+			gameobject.OnMessage("MovePlayerForward");
 	}
 };
 
@@ -91,8 +92,8 @@ class MovePlayerBack : public InputCommand
 public:
 	void execute(GameObject& gameobject) override
 	{
-		if (gameobject.getComponent<CameraComponent>())
-			gameobject.getComponent<CameraComponent>()->OnMessage("MovePlayerBack");
+		if (gameobject.getComponent<TransformComponent>())
+			gameobject.OnMessage("MovePlayerBack");
 	}
 };
 class FirstPersonCamera : public InputCommand
@@ -101,7 +102,7 @@ public:
 	void execute(GameObject& gameobject) override
 	{
 		if (gameobject.getComponent<CameraComponent>())
-			gameobject.getComponent<CameraComponent>()->OnMessage("FirstPersonCamera");
+			gameobject.OnMessage("FirstPersonCamera");
 	}
 };
 
@@ -111,34 +112,32 @@ public:
 	void execute(GameObject& gameobject) override
 	{
 		if (gameobject.getComponent<CameraComponent>())
-			gameobject.getComponent<CameraComponent>()->OnMessage("ThirdPersonCamera");
+			gameobject.OnMessage("ThirdPersonCamera");
 	}
 };
 
 struct InputHandler
 {
-	GameObject* m_gameobjects;
 
 	std::vector<GameObject*> v_objectsRequiringInput;
-
 	std::map<int, InputCommand*> m_controlMapping;
 
+	InputHandler()
+		{
 
-	InputHandler(GameObject* objectsRequiringInput) : m_gameobjects(objectsRequiringInput)
-	{
-		// the idea will be to map the keys directly from a config file that can be loaded in
-		// and changed on the fly
-		m_controlMapping[65] = new RotateCameraLeft;
-		m_controlMapping[68] = new RotateCameraRight;
-		m_controlMapping[87] = new RotateCameraUp;
-		m_controlMapping[83] = new RotateCameraDown;
-		m_controlMapping[90] = new MovePlayerLeft;
-		m_controlMapping[88] = new MovePlayerRight;
-		m_controlMapping[69] = new MovePlayerForward;
-		m_controlMapping[81] = new MovePlayerBack;
-		m_controlMapping[82] = new FirstPersonCamera;
-		m_controlMapping[84] = new ThirdPersonCamera;
-	}
+			// the idea will be to map the keys directly from a config file that can be loaded in
+			// and changed on the fly
+			m_controlMapping[37] = new RotateCameraLeft; // Left Arrow
+			m_controlMapping[39] = new RotateCameraRight; // Right Arrow
+			m_controlMapping[38] = new RotateCameraUp; // Up Arrow
+			m_controlMapping[40] = new RotateCameraDown; // Down Arrow
+			m_controlMapping[65] = new MovePlayerLeft; // A
+			m_controlMapping[68] = new MovePlayerRight; // D
+			m_controlMapping[87] = new MovePlayerForward; // W
+			m_controlMapping[83] = new MovePlayerBack; // S
+			m_controlMapping[49] = new FirstPersonCamera; // 1
+			m_controlMapping[50] = new ThirdPersonCamera; // 2
+		}
 
 	void handleInputs(const std::vector<bool>& keyBuffer)
 	{
@@ -146,9 +145,18 @@ struct InputHandler
 		{
 			if (keyBuffer[mapEntry.first])
 			{
-				mapEntry.second->execute(*m_gameobjects);
+				for (int i = 0; i < v_objectsRequiringInput.size(); i++)
+				{
+					mapEntry.second->execute(*v_objectsRequiringInput[i]);
+				}
 			}
 		}
+
+	}
+
+	void addObjects(GameObject* objects)
+	{
+		v_objectsRequiringInput.push_back(objects);
 
 	}
 };

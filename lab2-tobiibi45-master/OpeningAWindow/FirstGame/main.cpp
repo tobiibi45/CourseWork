@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	engineCore = new PS4_EngineCore;
 #endif
 
-	if (!engineCore->initWindow(800, 600, "InputExample"))
+	if (!engineCore->initWindow(1920, 1080, "MyFirstGame"))
 		return -1;
 
 	FirstGame game;

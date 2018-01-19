@@ -23,9 +23,10 @@ void GameScene::render(IEngineCore * m_engineInterfacePtr)
 	// update the camera (probably don't need to do this each frame)
 	m_engineInterfacePtr->setCamera(m_camera);
 
-	// draw the cubes
+	// draw the models
 	for (auto gameobjects : v_gameObjects)
 	{
+
 		m_engineInterfacePtr->drawModel(gameobjects->getComponent<ModelComponent>()->themodel 
 			,gameobjects->getComponent<TransformComponent>()->getModelMatrix());
 	}

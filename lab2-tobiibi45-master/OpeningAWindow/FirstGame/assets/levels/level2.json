@@ -1,0 +1,124 @@
+{
+  "GameObjects": [
+    {
+      "name": "tree", 
+      "orientation": [
+        1.0, 
+        0.0, 
+        0.0, 
+        0.0
+      ], 
+      "position": [
+        251.5098969998603, 
+        8.248205099453457, 
+        273.4182871580428
+      ], 
+      "type": "StaticEnvironmentObject"
+    }, 
+    {
+      "name": "tree", 
+      "orientation": [
+        1.0, 
+        0.0, 
+        0.0, 
+        0.0
+      ], 
+      "position": [
+        264.9536268479067, 
+        8.248205099453457, 
+        -362.07266187652135
+      ], 
+      "type": "StaticEnvironmentObject"
+    }, 
+    {
+      "name": "tree", 
+      "orientation": [
+        1.0, 
+        0.0, 
+        0.0, 
+        0.0
+      ], 
+      "position": [
+        -212.8505872711596, 
+        8.248205099453457, 
+        314.2294730180938
+      ], 
+      "type": "StaticEnvironmentObject"
+    }, 
+    {
+      "name": "deer", 
+      "orientation": [
+        1.0, 
+        0.0, 
+        0.0, 
+        0.0
+      ], 
+      "position": [
+        0.0, 
+        8.248205099453457, 
+        0.0
+      ], 
+      "type": "PlayerCharacter"
+    }, 
+    {
+      "name": "grass", 
+      "orientation": [
+        1.0, 
+        0.0, 
+        0.0, 
+        0.0
+      ], 
+      "position": [
+        0.0, 
+        0.0, 
+        0.0
+      ], 
+      "type": "StaticEnvironmentObject"
+    }, 
+    {
+      "name": "floor", 
+      "orientation": [
+        1.0, 
+        0.0, 
+        0.0, 
+        0.0
+      ], 
+      "position": [
+        0.0, 
+        132.7129341636922, 
+        0.0
+      ], 
+      "type": "StaticEnvironmentObject"
+    }, 
+    {
+      "name": "tree", 
+      "orientation": [
+        1.0, 
+        0.0, 
+        0.0, 
+        0.0
+      ], 
+      "position": [
+        26.54800699050309, 
+        8.248205099453457, 
+        0.0
+      ], 
+      "type": "StaticEnvironmentObject"
+    }, 
+    {
+      "name": "tree", 
+      "orientation": [
+        1.0, 
+        0.0, 
+        0.0, 
+        0.0
+      ], 
+      "position": [
+        -226.44245943006376, 
+        8.248205099453457, 
+        -392.7957292052294
+      ], 
+      "type": "StaticEnvironmentObject"
+    }
+  ]
+}

@@ -17,47 +17,23 @@ public:
 	void OnUpdate(float dt) override{}
 	void OnMessage(const std::string m) override
 	{
-		if (m == "rotateLeft")
-		{
-			rotate(-ADJUSTMENT_VALUE, YAXIS);
-		}
-		else if (m == "rotateRight")
-		{
-			rotate(ADJUSTMENT_VALUE, YAXIS);
-		}
-		else if (m == "rotateUp")
+		if (m == "MovePlayerLeft")
 		{
 			rotate(-ADJUSTMENT_VALUE, XAXIS);
 		}
-		else if (m == "rotateDown")
+		else if (m == "MovePlayerRight")
 		{
 			rotate(ADJUSTMENT_VALUE, XAXIS);
 		}
-		else if (m == "scaleUp")
+		else if (m == "MovePlayerUp")
 		{
-			scaleUp(SCALEUP_VALUE);
+			rotate(-ADJUSTMENT_VALUE, ZAXIS);
 		}
-
-		else if (m == "scaleDown")
+		else if (m == "MovePlayerDown")
 		{
-			scaleUp(SCALEDOWN_VALUE);
+			rotate(ADJUSTMENT_VALUE, ZAXIS);
 		}
-		else if (m == "translateLeft")
-		{
-			translate(TRANSLATELEFT_VALUE);
-		}
-		else if (m == "translateRight")
-		{
-			translate(TRANSLATERIGHT_VALUE);
-		}
-		else if (m == "translateUp")
-		{
-			translate(TRANSLATEUP_VALUE);
-		}
-		else if (m == "translateDown")
-		{
-			translate(TRANSLATEDOWN_VALUE);
-		}
+	
 	}
 	TransformComponent() : m_position(0), m_orientation(1,0,0,0), m_scale(1.0f) {}
 	TransformComponent(const glm::vec3& pos) : m_position(pos), m_orientation(1, 0, 0, 0), m_scale(1.0f) {}

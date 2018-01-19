@@ -5,6 +5,7 @@
 
 class FirstGame : public Game
 {
+	enum class SceneChange { firstScene, SecondScene, ThirdScene };
 public: 
 	FirstGame();
 
@@ -15,5 +16,7 @@ public:
 
 	GameScene* m_currentscene;
 	ModelManager mm;
+	SceneChange scene_change;
+	TransformComponent* trans;
 
 };
